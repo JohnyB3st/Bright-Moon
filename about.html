@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О нас - Bright Moon</title>
+    <link rel="stylesheet" href="bright-moon-styles.css">
+    <style>
+        .social-links {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px var(--shadow-color);
+        }
+
+        .social-links h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .social-list li {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .social-list a {
+            color: var(--link-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-list a:hover {
+            color: #0056b3;
+        }
+
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            margin-right: 10px;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .telegram-icon::before {
+            content: "📱";
+        }
+
+        .tiktok-icon::before {
+            content: "🎵";
+        }
+
+        .bot-icon::before {
+            content: "🤖";
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <div class="moon-icon"></div>
+                <a href="index.html" class="logo-text">Bright Moon</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="about.html" class="active">О нас</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <h1>О нас</h1>
+            <p>Мы команда Bright Moon, и наша цель - помочь вам найти гармонию и баланс в жизни.</p>
+        </section>
+
+        <section class="social-links">
+            <h2>Полезные ссылки</h2>
+            <ul class="social-list">
+                <li>
+                    <span class="telegram-icon"></span>
+                    <a href="https://t.me/moontinon" target="_blank">Наш Telegram канал</a>
+                </li>
+                <li>
+                    <span class="tiktok-icon"></span>
+                    <a href="https://www.tiktok.com/@.seeyou1_?_t=ZP-8xTu2TFRXm2&_r=1" target="_blank">Мы в TikTok</a>
+                </li>
+                <li>
+                    <span class="bot-icon"></span>
+                    <a href="https://t.me/dim_moonl1ght_bot" target="_blank">Наш бот поддержки</a>
+                </li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2025 Bright Moon. Путь к гармонии начинается с первого шага.</p>
+    </footer>
+</body>
+</html> 
