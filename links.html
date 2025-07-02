@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bright Moon - Полезные ссылки</title>
+    <link rel="stylesheet" href="bright-moon-styles.css">
+    <style>
+        :root {
+            --primary-color: #6a0dad;
+            --primary-color-rgb: 106, 13, 173;
+            --accent-color: #f0e6ff;
+            --text-color: #333;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <div class="moon-icon"></div>
+                <a href="index.html" class="logo-text">Bright Moon</a>
+            </div>
+            <div class="search-container">
+                <input type="search" class="search-input" placeholder="Поиск по статьям..." id="searchInput">
+                <div id="searchStatus" class="search-status"></div>
+                <div id="searchSuggestions" class="search-suggestions"></div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="links.html">Ссылки</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <h1>Полезные ссылки</h1>
+            <p>Подборка полезных ресурсов для саморазвития и поддержания психического здоровья.</p>
+        </section>
+
+        <section class="links-section">
+            <div class="links-grid">
+                <div class="link-card">
+                    <h3>Психологическая поддержка</h3>
+                    <ul>
+                        <li><a href="#">Телефон доверия</a></li>
+                        <li><a href="#">Онлайн-консультации</a></li>
+                        <li><a href="#">Группы поддержки</a></li>
+                    </ul>
+                </div>
+                
+                <div class="link-card">
+                    <h3>Образовательные ресурсы</h3>
+                    <ul>
+                        <li><a href="#">Курсы по психологии</a></li>
+                        <li><a href="#">Статьи о ментальном здоровье</a></li>
+                        <li><a href="#">Видео-лекции</a></li>
+                    </ul>
+                </div>
+                
+                <div class="link-card">
+                    <h3>Полезные приложения</h3>
+                    <ul>
+                        <li><a href="#">Медитация</a></li>
+                        <li><a href="#">Дыхательные практики</a></li>
+                        <li><a href="#">Трекеры настроения</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2025 Bright Moon. Путь к гармонии начинается с первого шага.</p>
+    </footer>
+
+    <script>
+    // Массив со всеми статьями сайта
+    const articles = [
+        {
+            title: 'Панические атаки',
+            description: 'Что такое паническая атака, симптомы и методы борьбы с ними',
+            url: 'panic.html',
+            icon: '🫀',
+            keywords: ['паника', 'тревога', 'атака', 'страх', 'симптомы', 'дыхание']
+        },
+        {
+            title: 'Комплексы и самооценка',
+            description: 'Работа с личными комплексами и повышение самооценки',
+            url: 'complexes.html',
+            icon: '🧠',
+            keywords: ['комплексы', 'самооценка', 'уверенность', 'психология', 'развитие']
+        },
+        {
+            title: 'Правильное питание',
+            description: 'Основы здорового питания и советы по составлению рациона',
+            url: 'nutrition.html',
+            icon: '🥗',
+            keywords: ['питание', 'здоровье', 'диета', 'еда', 'рацион', 'витамины']
+        }
+    ];
+
+    function highlightText(text, searchTerm) {
+        if (!searchTerm) return text;
+        const regex = new RegExp(`(${searchTerm})`, 'gi');
+        return text.replace(regex, '<span class="highlight">$1</span>');
+    }
+
+    function createSuggestionElement(article, searchTerm) {
+        const div = document.createElement('div');
+        div.className = 'suggestion-item';
+        div.innerHTML = `
+            <div class="suggestion-icon">${article.icon}</div>
+            <div class="suggestion-content">
+                <div class="suggestion-title">${highlightText(article.title, searchTerm)}</div>
+                <div class="suggestion-description">${highlightText(article.description, searchTerm)}</div>
+            </div>
+        `;
+        div.addEventListener('click', () => {
+            window.location.href = article.url;
+        });
+        return div;
+    }
+
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        const searchSuggestions = document.getElementById('searchSuggestions');
+        const searchStatus = document.getElementById('searchStatus');
+        
+        searchSuggestions.innerHTML = '';
+        
+        if (searchTerm === '') {
+            searchSuggestions.style.display = 'none';
+            searchStatus.style.display = 'none';
+            return;
+        }
+
+        const filteredArticles = articles.filter(article => {
+            return article.title.toLowerCase().includes(searchTerm) ||
+                   article.description.toLowerCase().includes(searchTerm) ||
+                   article.keywords.some(keyword => keyword.toLowerCase().includes(searchTerm));
+        });
+
+        if (filteredArticles.length > 0) {
+            searchSuggestions.style.display = 'block';
+            filteredArticles.forEach(article => {
+                searchSuggestions.appendChild(createSuggestionElement(article, searchTerm));
+            });
+            searchStatus.textContent = `Найдено статей: ${filteredArticles.length}`;
+            searchStatus.style.color = '#28a745';
+        } else {
+            searchSuggestions.style.display = 'none';
+            searchStatus.textContent = 'Статей не найдено';
+            searchStatus.style.color = '#666';
+        }
+        searchStatus.style.display = 'block';
+    });
+
+    document.addEventListener('click', function(e) {
+        const searchSuggestions = document.getElementById('searchSuggestions');
+        const searchContainer = document.querySelector('.search-container');
+        if (!searchContainer.contains(e.target)) {
+            searchSuggestions.style.display = 'none';
+        }
+    });
+    </script>
+</body>
+</html> 
